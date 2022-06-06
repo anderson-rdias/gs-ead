@@ -1,9 +1,10 @@
 package br.com.jkcontrol.gcead.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,10 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "T_GCO_PORTARIA")
+@SequenceGenerator(name = "portaria", sequenceName = "SQ_TB_PORTARIA", allocationSize = 1)
 public class Portaria implements Serializable{
 	
 	/**
@@ -25,7 +28,8 @@ public class Portaria implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "portaria")
+	@Column(name="id", unique = true, nullable = false)
 	private Long id;
 
 	@Column(name = "nr_portaria", nullable = false)
@@ -34,30 +38,28 @@ public class Portaria implements Serializable{
 	@Column(name = "nm_portaria", nullable = false)
 	private String nomePortaria;
 	
-	@Column(name = "st_status", nullable = false)
+	@Column(name = "st_status")
 	private Boolean ativo;
 	
 	@Column(name="dt_inicio", nullable = false)
-	private LocalDateTime dataInicio;
+	private LocalDate dataInicio;
 	
 	@Column(name="dt_termino", nullable = false)
-	private LocalDateTime dataTermino;
+	private LocalDate dataTermino;
 	
 	@ManyToOne
-	@JoinColumn(name = "condominio_idCondominio")
+	@JoinColumn(name = "condominio_id")
 	private Condominio condominio;
 	
-	@OneToMany(mappedBy = "portaria")
-	private List<Condominio> condominios;
+	@OneToMany(mappedBy = "condominio")
+	private Set<Portaria> portarias;
 
 	public Portaria() {
 	}
 
-	public Portaria(int numeroPortaria, String nomePortaria, Boolean ativo, LocalDateTime dataInicio, LocalDateTime dataTermino, Condominio condominio) {
-		super();
+	public Portaria(int numeroPortaria, String nomePortaria, LocalDate dataInicio, LocalDate dataTermino, Condominio condominio) {
 		this.numeroPortaria = numeroPortaria;
 		this.nomePortaria = nomePortaria;
-		this.ativo = ativo;
 		this.dataInicio = dataInicio;
 		this.dataTermino = dataTermino;
 		this.condominio = condominio;
@@ -95,27 +97,27 @@ public class Portaria implements Serializable{
 		this.ativo = ativo;
 	}
 
-	public List<Condominio> getCondominios() {
-		return condominios;
+	public Set<Portaria> getPortarias() {
+		return portarias;
 	}
 
-	public void setCondominios(List<Condominio> condominios) {
-		this.condominios = condominios;
+	public void setPortarias(Set<Portaria> portarias) {
+		this.portarias = portarias;
 	}
 
-	public LocalDateTime getDataInicio() {
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(LocalDateTime dataInicio) {
+	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public LocalDateTime getDataTermino() {
+	public LocalDate getDataTermino() {
 		return dataTermino;
 	}
 
-	public void setDataTermino(LocalDateTime dataTermino) {
+	public void setDataTermino(LocalDate dataTermino) {
 		this.dataTermino = dataTermino;
 	}
 

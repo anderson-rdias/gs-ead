@@ -2,6 +2,7 @@ package br.com.jkcontrol.gcead.entity;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,8 +26,7 @@ public class Movimentacao implements Serializable {
 		this.dtMovimentacao = LocalDateTime.now();
 	}
 	
-	public Movimentacao(Long id, String tpMovimentacao, LocalDateTime dataMovimentacao, Portaria portaria, FuncionarioPortaria funcionario, Visitante visitante) {
-		super();
+	public Movimentacao(String tpMovimentacao, LocalDateTime dataMovimentacao, Portaria portaria, FuncionarioPortaria funcionario, Visitante visitante) {
 		this.tpMovimentacao = tpMovimentacao;
 		this.portaria = portaria;
 		this.funcionario = funcionario;
@@ -41,7 +41,7 @@ public class Movimentacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GCO_MOVIMENTACAO_PORTARIA")
 	private Long id;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "portaria_id")
 	private Portaria portaria;
 	

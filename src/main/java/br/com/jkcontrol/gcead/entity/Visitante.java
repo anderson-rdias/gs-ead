@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "T_GCO_Visitante")
-@SequenceGenerator(name = "GCO_Visitante", sequenceName = "SQ_TB_GCO_VISITANTE", allocationSize = 1)
+@SequenceGenerator(name = "GCO_Visitante", sequenceName = "SQ_T_GCO_VISITANTE", allocationSize = 1)
 
 public class Visitante implements Serializable{
 	

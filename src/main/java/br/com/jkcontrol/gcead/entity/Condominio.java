@@ -1,14 +1,17 @@
 package br.com.jkcontrol.gcead.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,7 +27,7 @@ public class Condominio implements Serializable{
 
 	public Condominio() {}
 	
-	public Condominio(String cnpj, String razaoSocial, String fantasia, LocalDateTime dataFundacao) {
+	public Condominio(String cnpj, String razaoSocial, String fantasia, LocalDate dataFundacao) {
 		this.cnpj = cnpj;
 		this.razaoSocial = razaoSocial;
 		this.fantasia = fantasia;
@@ -45,8 +48,11 @@ public class Condominio implements Serializable{
 	private String razaoSocial;
 	
 	@Column(name = "dt_fundacao")
-	private LocalDateTime dataFundacao;
-
+	private LocalDate dataFundacao;
+	
+	@OneToMany
+	private Set<Portaria> portarias;
+	
 	public Long getId() {
 		return id;
 	}
@@ -79,14 +85,22 @@ public class Condominio implements Serializable{
 		this.razaoSocial = razaoSocial;
 	}
 
-	public LocalDateTime getDataFundacao() {
+	public LocalDate getDataFundacao() {
 		return dataFundacao;
 	}
 
-	public void setDataFundacao(LocalDateTime dataFundacao) {
+	public void setDataFundacao(LocalDate dataFundacao) {
 		this.dataFundacao = dataFundacao;
 	}
 	
+	public Set<Portaria> getPortarias() {
+		return portarias;
+	}
+
+	public void setPortarias(Set<Portaria> portarias) {
+		this.portarias = portarias;
+	}
+
 	@Override
 	public String toString() {
 		return "\nCPNJ: " + this.getCnpj() +

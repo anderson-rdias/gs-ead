@@ -24,14 +24,14 @@ public class App {
 		VisitanteServiceImpl visitanteService = VisitanteServiceImpl.getInstance();
 		MovimentacaoServiceImpl movimentacaoService = MovimentacaoServiceImpl.getInstance();
 		
-		Condominio condominio1 = new Condominio("856478234", "Vila Prudente", "VL", LocalDate.of(2022, 1, 1));
+		Condominio condominio1 = new Condominio("8564782344343", "Granja Viana", "GL Condominios", LocalDate.of(2022, 1, 1));
 		condominioService.inserir(condominio1);
 		
 		Condominio condominio2 = new Condominio("542658756", "Brecheret", "BR", LocalDate.of(2021, 1, 1));
 		condominioService.inserir(condominio2);
 		
 		Portaria portaria1 = new Portaria(1, "Portaria Principal", LocalDate.of(2022, 1, 1), LocalDate.of(2023, 1, 1), condominio1);
-        Portaria portaria2 = new Portaria(2, "Portaria de ServiÃ§o", LocalDate.of(2021, 1, 1), LocalDate.of(2024, 1, 1), condominio2);
+        Portaria portaria2 = new Portaria(2, "Portaria de Serviço", LocalDate.of(2021, 1, 1), LocalDate.of(2024, 1, 1), condominio2);
 
         portariaService.inserir(portaria1);
         portariaService.inserir(portaria2);

@@ -10,10 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "T_GCO_FUNC_PORTARIA")
+@SequenceGenerator(name = "GCO_Visitante", sequenceName = "SQ_T_GCO_FUNC_PORTARIA", allocationSize = 1)
 public class FuncionarioPortaria implements Serializable{
 
 	/**
